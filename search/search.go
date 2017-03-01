@@ -31,7 +31,7 @@ func ListInstances(name string) ([]string, error) {
 
 	for _, r := range resp.Reservations {
 		for _, t := range r.Instances[0].Tags {
-			if *t.Key == "Name" {
+			if *r.Instances[0].State.Name == ec2.InstanceStateNameRunning && *t.Key == "Name" {
 				instances = append(instances, *t.Value)
 			}
 		}
